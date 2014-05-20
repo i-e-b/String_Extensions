@@ -1,4 +1,4 @@
-﻿namespace StringClusterScanTests
+﻿namespace StringClusterScanTests.Search
 {
     using System;
     using System.Diagnostics;
@@ -7,7 +7,7 @@
     using String_Extensions;
 
     [TestFixture]
-    public class ScannerTests
+    public class FindClusterTests
     {
         [Test]
         [TestCase("contains simple match", "simple", 9)]

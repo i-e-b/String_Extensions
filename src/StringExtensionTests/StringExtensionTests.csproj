@@ -37,14 +37,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ScannerTests.cs" />
+    <Compile Include="Replace\ReplaceExtensionTests.cs" />
+    <Compile Include="Search\FindClusterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Substring\SubstringTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StringClusterScan\String_Extensions.csproj">
+    <ProjectReference Include="..\String_Extensions\String_Extensions.csproj">
       <Project>{329A3162-B373-4957-AABD-149FC036ED40}</Project>
       <Name>String_Extensions</Name>
     </ProjectReference>

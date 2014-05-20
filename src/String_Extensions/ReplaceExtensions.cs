@@ -13,6 +13,12 @@
         /// <example><code>"OnCe UpOn A tImE".ReplaceCaseInvariant("TiMe", "Moon"); // "OnCe UpOn A Moon"</code></example>
         public static string ReplaceCaseInvariant(this string src, string targetPattern, string replacement)
         {
+            if (targetPattern == null) throw new ArgumentNullException("targetPattern");
+            if (replacement == null) throw new ArgumentNullException("replacement");
+            if (src == null) throw new ArgumentNullException("src");
+
+            if (targetPattern == "") return src;
+
             var idx = 0;
             var tmp = src;
             while (0 <= (idx = tmp.IndexOf(targetPattern, idx, StringComparison.OrdinalIgnoreCase)))
