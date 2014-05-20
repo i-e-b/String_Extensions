@@ -95,7 +95,7 @@
         {
             if (string.IsNullOrEmpty(src)) return "";
 
-            var idx = Math.Min(src.Length - 1, src.LastIndexOf(c) + 1);
+            var idx = Math.Min(src.Length, src.LastIndexOf(c) + 1);
             return idx < 0 ? src : src.Substring(idx);
         }
 
@@ -107,7 +107,7 @@
         {
             if (string.IsNullOrEmpty(src)) return "";
 
-            var idx = Math.Min(src.Length - 1, src.ExtendedIndexOf(s, s.Length, stringComparison));
+            var idx = Math.Min(src.Length, src.ExtendedIndexOf(s, s.Length, stringComparison));
             return idx < 0 ? src : src.Substring(idx);
         }
     }
