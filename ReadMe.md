@@ -1,5 +1,6 @@
 String_Extensions
 =================
+[![Build status](https://ci.appveyor.com/api/projects/status/f5bm61wvueo79beq)](https://ci.appveyor.com/project/i-e-b/string-extensions)
 
 A big pile of string manipulation methods for C#
 
