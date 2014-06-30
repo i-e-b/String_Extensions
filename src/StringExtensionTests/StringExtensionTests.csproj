@@ -37,6 +37,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparison\CompareWildcardTests.cs" />
+    <Compile Include="Comparison\NaturalComparerTests.cs" />
+    <Compile Include="Parsing\ToByteArrayTests.cs" />
     <Compile Include="Replace\ReplaceExtensionTests.cs" />
     <Compile Include="Search\FindClusterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

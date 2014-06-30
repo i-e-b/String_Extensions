@@ -1,6 +1,7 @@
 ﻿namespace String_Extensions
 {
     using System;
+    using System.Collections.Generic;
 
     public static class ParsingExtensions
     {
@@ -11,13 +12,30 @@
         /// </summary>
         public static byte[] ToByteArray(this string hexString)
         {
-            var numberChars = hexString.Length;
-            var bytes = new byte[numberChars / 2];
-            for (var i = 0; i < numberChars; i += 2)
+            var outp = new List<byte>(hexString.Length / 2); // initial guess at length.
+
+            int i = 0;
+            while (i < hexString.Length)
             {
-                bytes[i / 2] = Convert.ToByte(hexString.Substring(i, 2), 16);
+                while (!char.IsLetterOrDigit(hexString[i]))
+                {
+                    i++;
+                    if (i >= hexString.Length) throw new Exception("hex string contains an uneven number of characters");
+                }
+                char a = hexString[i];
+                i++;
+
+                while (!char.IsLetterOrDigit(hexString[i]))
+                {
+                    i++;
+                    if (i >= hexString.Length) throw new Exception("hex string contains an uneven number of characters");
+                }
+                char b = hexString[i];
+                i++;
+
+                outp.Add(Convert.ToByte(string.Concat(a, b), 16));
             }
-            return bytes;
+            return outp.ToArray();
         }
     }
 }
