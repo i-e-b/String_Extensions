@@ -43,6 +43,7 @@
     <Compile Include="Replace\ReplaceExtensionTests.cs" />
     <Compile Include="Search\FindClusterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\FindTests.cs" />
     <Compile Include="Substring\SubstringTests.cs" />
   </ItemGroup>
   <ItemGroup>

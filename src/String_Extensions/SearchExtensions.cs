@@ -1,6 +1,7 @@
 ﻿namespace String_Extensions
 {
     using System.Linq;
+    using String_Extensions.support;
 
     public static class SearchExtensions
     {
@@ -26,6 +27,32 @@
                 if (head >= haystack.Length) return -1;
                 rolling -= haystack[idx];
                 rolling += haystack[head];
+                head++;
+                idx++;
+            }
+
+            return idx;
+        }
+
+        /// <summary>
+        /// Find the first offset in a string using a rolling hash. This is just an experiment -- use string.IndexOf().
+        /// </summary>
+        public static int Find(this string haystack, string needle)
+        {
+            if (haystack == null) return -1;
+            if (needle == null) return -1;
+
+            if (haystack.Length < needle.Length) return -1;
+
+            var match = RollingHash32.HashOfString(needle);
+            var rolling = new RollingHash32(needle.Length, haystack);
+
+            var idx = 0;
+            var head = needle.Length;
+            while (rolling.Value != match)
+            {
+                if (head >= haystack.Length) return -1;
+                rolling.AddChar(haystack[head]);
                 head++;
                 idx++;
             }
