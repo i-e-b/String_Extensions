@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comparison\CompareWildcardTests.cs" />
+    <Compile Include="Aggregation\DictionaryJoinTests.cs" />
     <Compile Include="Comparison\NaturalComparerTests.cs" />
     <Compile Include="Parsing\ToByteArrayTests.cs" />
     <Compile Include="Replace\ReplaceExtensionTests.cs" />
@@ -55,6 +56,7 @@
       <Name>String_Extensions</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

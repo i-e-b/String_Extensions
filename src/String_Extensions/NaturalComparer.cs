@@ -28,12 +28,14 @@
         {
             if (!(left is string)) throw new ArgumentException("Parameter type is not string", "left");
             if (!(right is string)) throw new ArgumentException("Parameter type is not string", "right");
-            return Compare(left as string, right as string);
+            return Compare((string) left, (string) right);
         }
 
         public int Compare(string left, string right)
         {
             if (left == right) return 0;
+            if (left == null) return -1;
+            if (right == null) return 1;
 
             var leftmatches = sRegex.Matches(left);
             var rightmatches = sRegex.Matches(right);
@@ -89,7 +91,7 @@
                 return Math.Sign(right.Length - left.Length);
             }
 
-            return left.CompareTo(right);
+            return String.Compare(left, right, StringComparison.Ordinal);
         }
 
     }

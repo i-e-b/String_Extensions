@@ -3,6 +3,7 @@
     using NUnit.Framework;
     using String_Extensions;
 
+
     [TestFixture]
     public class CompareWildcardTests
     {

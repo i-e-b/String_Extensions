@@ -1,7 +1,7 @@
 ﻿namespace String_Extensions
 {
     using System.Linq;
-    using String_Extensions.support;
+    using support;
 
     public static class SearchExtensions
     {
@@ -17,8 +17,8 @@
 
             if (haystack.Length < needle.Length) return -1;
 
-            long sum = needle.Sum(c => (int)c);
-            long rolling = haystack.Take(needle.Length).Sum(c => (int)c);
+            long sum = needle.Sum(c => c);
+            long rolling = haystack.Take(needle.Length).Sum(c => c);
 
             var idx = 0;
             var head = needle.Length;

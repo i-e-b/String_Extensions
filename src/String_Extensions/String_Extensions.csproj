@@ -34,6 +34,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregateExtensions.cs" />
     <Compile Include="ComparisonExtensions.cs" />
     <Compile Include="NaturalComparer.cs" />
     <Compile Include="ParsingExtensions.cs" />

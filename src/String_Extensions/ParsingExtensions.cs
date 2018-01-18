@@ -10,7 +10,7 @@
         /// <para>Take a string like "BADF00BA" into a byte array. String length should be a multiple of two.</para>
         /// Remember to check for network order issues!
         /// </summary>
-        public static byte[] ToByteArray(this string hexString)
+        public static byte[] HexToByteArray(this string hexString)
         {
             var outp = new List<byte>(hexString.Length / 2); // initial guess at length.
 

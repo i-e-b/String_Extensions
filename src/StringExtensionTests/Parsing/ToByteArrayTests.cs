@@ -23,22 +23,22 @@
                 0x20,0x6D,0x61,0x6E,0x69,0x70,0x75,0x6C,0x61,0x74,0x69,0x6F,0x6E,0x20,0x6D,0x65,0x74,0x68,0x6F,0x64,
                 0x73,0x20,0x66,0x6F,0x72,0x20,0x43,0x23,0x0D,0x0A,0x0D,0x0A,0x54,0x6F,0x64,0x6F,0x0D,0x0A,0x2D,0x2D };
 
-            Assert.That(input.ToByteArray().SequenceEqual(expected));
-            Assert.That(input.ToLower().ToByteArray().SequenceEqual(expected));
-            Assert.That(input.Replace(" ","").ToLower().ToByteArray().SequenceEqual(expected));
+            Assert.That(input.HexToByteArray().SequenceEqual(expected));
+            Assert.That(input.ToLower().HexToByteArray().SequenceEqual(expected));
+            Assert.That(input.Replace(" ","").ToLower().HexToByteArray().SequenceEqual(expected));
         }
 
 
         [Test]
         public void empty_input()
         {
-            Assert.That("".ToByteArray(), Is.Empty);
+            Assert.That("".HexToByteArray(), Is.Empty);
         }
 
         [Test]
         public void invalid_input()
         {
-            Assert.Throws<FormatException>(() => "not a hex string".ToByteArray());
+            Assert.Throws<FormatException>(() => "not a hex string".HexToByteArray());
         }
 
          
