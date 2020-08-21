@@ -77,5 +77,13 @@
         {
             Assert.That(haystack.ReplaceCaseInvariant(find, replace), Is.EqualTo(expected));
         }
+
+        [Test]
+        [TestCase("HÉLLO, Åbjørn‼", "HELLO, Abjorn!!")]
+        [TestCase("", "")]
+        public void can_reduce_strings_to_ascii(string input, string expected)
+        {
+            Assert.That(input.ReplaceAsciiCompatible(), Is.EqualTo(expected));
+        }
     }
 }

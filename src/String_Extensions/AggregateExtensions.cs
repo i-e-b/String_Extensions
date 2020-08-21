@@ -12,7 +12,7 @@ namespace String_Extensions
         /// <param name="source">Dictionary to combine</param>
         /// <param name="keyValueCombiner">String to join keys to values</param>
         /// <param name="entryCombiner">String to join the resulting key-value pairs</param>
-        public static string Join<TKey, TValue>(this Dictionary<TKey, TValue> source, string keyValueCombiner, string entryCombiner) {
+        public static string? Join<TKey, TValue>(this Dictionary<TKey, TValue>? source, string keyValueCombiner, string entryCombiner) {
             if (source == null) return null;
             return string.Join(entryCombiner, source.Select(x => x.Key + keyValueCombiner + x.Value));
         }

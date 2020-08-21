@@ -49,6 +49,7 @@
                     return 1;
                 }
                 var rm = enrm.Current as Match;
+                if (rm == null) continue;
 
                 var tokenresult = CompareTokens(CapturedStringFromMatch(lm), CapturedStringFromMatch(rm));
                 if (tokenresult != 0)

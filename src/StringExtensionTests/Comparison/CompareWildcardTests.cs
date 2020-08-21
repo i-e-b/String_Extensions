@@ -3,6 +3,25 @@
     using NUnit.Framework;
     using String_Extensions;
 
+    [TestFixture]
+    public class EditDistanceTests
+    {
+        [Test]
+        [TestCase("hello", "jello", 1)]
+        [TestCase("hello", "fellow", 2)]
+        [TestCase("hello", "constantinople", 13)]
+        [TestCase("h", "hi", 1)]
+        [TestCase("hi", "h", 1)]
+        [TestCase("", "", 0)]
+        [TestCase("", "123456789", 9)]
+        [TestCase("123456789", "", 9)]
+        public void edit_distance_of_strings(string a, string b, int expected)
+        {
+            var actual = a.EditDistance(b);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+    }
 
     [TestFixture]
     public class CompareWildcardTests
