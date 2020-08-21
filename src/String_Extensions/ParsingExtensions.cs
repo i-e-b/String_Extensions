@@ -3,6 +3,9 @@
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Extensions for parsing common data types
+    /// </summary>
     public static class ParsingExtensions
     {
         /// <summary>

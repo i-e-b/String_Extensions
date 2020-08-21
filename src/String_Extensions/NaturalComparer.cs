@@ -21,7 +21,11 @@
         private static readonly Regex sRegex;
         static NaturalComparer()
         {
+#if NETSTANDARD
+            sRegex = new Regex(@"[\W\.]*([\w-[\d]]+|[\d]+)", RegexOptions.None);
+#else
             sRegex = new Regex(@"[\W\.]*([\w-[\d]]+|[\d]+)", RegexOptions.Compiled);
+#endif
         }
 
         int IComparer.Compare(object left, object right)
@@ -31,6 +35,9 @@
             return Compare((string) left, (string) right);
         }
 
+        /// <summary>
+        /// Compare two strings for relative sort order
+        /// </summary>
         public int Compare(string left, string right)
         {
             if (left == right) return 0;

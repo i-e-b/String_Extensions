@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Extensions to compare strings
+    /// </summary>
     public static class ComparisonExtensions
     {
         /// <summary>

@@ -3,6 +3,9 @@
     using System.Linq;
     using support;
 
+    /// <summary>
+    /// Extensions for searching inside strings
+    /// </summary>
     public static class SearchExtensions
     {
         /// <summary>
@@ -17,8 +20,8 @@
 
             if (haystack.Length < needle.Length) return -1;
 
-            long sum = needle.Sum(c => c);
-            long rolling = haystack.Take(needle.Length).Sum(c => c);
+            long sum = needle.ToCharArray().Sum(c => c);
+            long rolling = haystack.ToCharArray().Take(needle.Length).Sum(c => c);
 
             var idx = 0;
             var head = needle.Length;

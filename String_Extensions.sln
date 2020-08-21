@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Info", "Info", "{287D6419-4
 		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringExtensionsNetStd", "src\StringExtensionsNetStd\StringExtensionsNetStd.csproj", "{D02BE61E-3A1C-4B47-881D-0FDEE7265D30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{C2042BE7-9E1E-4954-91D5-294B564022F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2042BE7-9E1E-4954-91D5-294B564022F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2042BE7-9E1E-4954-91D5-294B564022F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D02BE61E-3A1C-4B47-881D-0FDEE7265D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D02BE61E-3A1C-4B47-881D-0FDEE7265D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D02BE61E-3A1C-4B47-881D-0FDEE7265D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D02BE61E-3A1C-4B47-881D-0FDEE7265D30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

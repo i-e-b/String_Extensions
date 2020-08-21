@@ -39,7 +39,7 @@
             _value = 0;
 
             int i = 0;
-            foreach (char c in prefillSource)
+            foreach (char c in prefillSource.ToCharArray())
             {
                 if (i >= windowWidth) break;
                 Fill(c);
@@ -58,7 +58,7 @@
         public static UInt32 HashOfString(string str)
         {
             var rh = new RollingHash32(str.Length);
-            foreach (char c in str)
+            foreach (char c in str.ToCharArray())
             {
                 rh.Fill(c);
             }

@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Extensions for searching and partitioning strings
+    /// </summary>
     public static class SubstringExtensions
     {
         /// <summary>

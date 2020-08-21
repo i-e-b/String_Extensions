@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard1.0</TargetFramework>
+        <LangVersion>8</LangVersion>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>StringExtensionsNetStdIeb</PackageId>
+        <Title>StringExtensions</Title>
+        <Authors>i-e-b</Authors>
+        <Description>A range of general string extensions for C#</Description>
+        <Copyright>2020 IEB</Copyright>
+        <PackageProjectUrl>https://github.com/i-e-b/String_Extensions</PackageProjectUrl>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <Optimize>true</Optimize>
+      <DocumentationFile>bin\Debug\StringExtensionsNetStd.xml</DocumentationFile>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Include="..\String_Extensions\AggregateExtensions.cs">
+        <Link>AggregateExtensions.cs</Link>
+      </Compile>
+      <Compile Include="..\String_Extensions\ComparisonExtensions.cs">
+        <Link>ComparisonExtensions.cs</Link>
+      </Compile>
+      <Compile Include="..\String_Extensions\NaturalComparer.cs">
+        <Link>NaturalComparer.cs</Link>
+      </Compile>
+      <Compile Include="..\String_Extensions\ParsingExtensions.cs">
+        <Link>ParsingExtensions.cs</Link>
+      </Compile>
+      <Compile Include="..\String_Extensions\ReplaceExtensions.cs">
+        <Link>ReplaceExtensions.cs</Link>
+      </Compile>
+      <Compile Include="..\String_Extensions\SearchExtensions.cs">
+        <Link>SearchExtensions.cs</Link>
+      </Compile>
+      <Compile Include="..\String_Extensions\SubstringExtensions.cs">
+        <Link>SubstringExtensions.cs</Link>
+      </Compile>
+      <Compile Include="..\String_Extensions\support\RollingHash32.cs">
+        <Link>RollingHash32.cs</Link>
+      </Compile>
+    </ItemGroup>
+
+</Project>
