@@ -18,57 +18,53 @@
     /// </remarks>
     public class NaturalComparer : IComparer, IComparer<string>
     {
-        private static readonly Regex sRegex;
+        private static readonly Regex _sRegex;
         static NaturalComparer()
         {
-#if NETSTANDARD
-            sRegex = new Regex(@"[\W\.]*([\w-[\d]]+|[\d]+)", RegexOptions.None);
-#else
-            sRegex = new Regex(@"[\W\.]*([\w-[\d]]+|[\d]+)", RegexOptions.Compiled);
-#endif
+            _sRegex = new Regex(@"[\W\.]*([\w-[\d]]+|[\d]+)", RegexOptions.None);
         }
 
         int IComparer.Compare(object left, object right)
         {
-            if (!(left is string)) throw new ArgumentException("Parameter type is not string", "left");
-            if (!(right is string)) throw new ArgumentException("Parameter type is not string", "right");
+            if (!(left is string)) throw new ArgumentException("Parameter type is not string", nameof(left));
+            if (!(right is string)) throw new ArgumentException("Parameter type is not string", nameof(right));
             return Compare((string) left, (string) right);
         }
 
         /// <summary>
         /// Compare two strings for relative sort order
         /// </summary>
-        public int Compare(string left, string right)
+        public int Compare(string? left, string? right)
         {
             if (left == right) return 0;
             if (left == null) return -1;
             if (right == null) return 1;
 
-            var leftmatches = sRegex.Matches(left);
-            var rightmatches = sRegex.Matches(right);
+            var leftMatches = _sRegex.Matches(left);
+            var rightMatches = _sRegex.Matches(right);
 
-            var enrm = rightmatches.GetEnumerator();
-            foreach (Match lm in leftmatches)
+            var rightEnum = rightMatches.GetEnumerator();
+            foreach (Match lm in leftMatches)
             {
-                if (!enrm.MoveNext())
+                if (!rightEnum.MoveNext())
                 {
                     // the right-hand string ran out first, so is considered "less-than" the left
                     return 1;
                 }
-                var rm = enrm.Current as Match;
+                var rm = rightEnum.Current as Match;
                 if (rm == null) continue;
 
-                var tokenresult = CompareTokens(CapturedStringFromMatch(lm), CapturedStringFromMatch(rm));
-                if (tokenresult != 0)
+                var tokenResult = CompareTokens(CapturedStringFromMatch(lm), CapturedStringFromMatch(rm));
+                if (tokenResult != 0)
                 {
-                    return tokenresult;
+                    return tokenResult;
                 }
             }
 
-            // the lefthand matches are exhausted;
-            // if there is more, then left was shorter, ie, lessthan
-            // if there's no more left in the righthand, then they were all equal
-            return enrm.MoveNext() ? -1 : 0;
+            // the left hand matches are exhausted;
+            // if there is more, then left was shorter, ie, less than
+            // if there's no more left in the right hand, then they were all equal
+            return rightEnum.MoveNext() ? -1 : 0;
         }
 
         private static string CapturedStringFromMatch(Match match)
@@ -79,19 +75,17 @@
 
         private static int CompareTokens(string left, string right)
         {
-            double leftval, rightval;
-
-            var leftisnum = double.TryParse(left, out leftval);
-            var rightisnum = double.TryParse(right, out rightval);
+            var leftIsNum = double.TryParse(left, out var leftVal);
+            var rightIsNum = double.TryParse(right, out var rightVal);
 
             // numbers always sort in front of text
-            if (leftisnum)
+            if (leftIsNum)
             {
-                if (!rightisnum) return -1;
+                if (!rightIsNum) return -1;
 
                 // they're both numeric
-                if (leftval < rightval) return -1;
-                if (rightval < leftval) return 1;
+                if (leftVal < rightVal) return -1;
+                if (rightVal < leftVal) return 1;
 
                 // if values are same, this might be due to leading 0s.
                 // Assuming this, the longest string would indicate more leading 0s

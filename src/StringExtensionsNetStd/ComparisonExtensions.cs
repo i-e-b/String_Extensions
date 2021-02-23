@@ -12,24 +12,24 @@
         /// Mask may contain literal characters, '*' or '?'
         /// There is no way to escape wildcard characters.
         /// </summary>
-        /// <param name="Mask">Pattern to match</param>
-        /// <param name="IgnoreCase">If true, case differences between this string and the mask will be ignored</param>
-        /// <param name="ToMatch">String to test</param>
+        /// <param name="mask">Pattern to match</param>
+        /// <param name="ignoreCase">If true, case differences between this string and the mask will be ignored</param>
+        /// <param name="toMatch">String to test</param>
         /// <returns>True if this string fits the mask string. False otherwise.</returns>
-        public static bool CompareWildcard(this string ToMatch, string Mask, bool IgnoreCase)
+        public static bool CompareWildcard(this string toMatch, string mask, bool ignoreCase)
         {
             int i = 0, k = 0;
 
-            while (k != ToMatch.Length)
+            while (k != toMatch.Length)
             {
-                switch (Mask[i])
+                switch (mask[i])
                 {
                     case '*':
-                        if ((i + 1) == Mask.Length) return true;
+                        if ((i + 1) == mask.Length) return true;
 
-                        while (k != ToMatch.Length)
+                        while (k != toMatch.Length)
                         {
-                            if (CompareWildcard(ToMatch.Substring(k + 1), Mask.Substring(i + 1), IgnoreCase)) return true;
+                            if (CompareWildcard(toMatch.Substring(k + 1), mask.Substring(i + 1), ignoreCase)) return true;
                             k += 1;
                         }
                         return false;
@@ -38,15 +38,15 @@
                         break;
 
                     default:
-                        if (IgnoreCase == false && ToMatch[k] != Mask[i]) return false;
-                        if (IgnoreCase && Char.ToLower(ToMatch[k]) != Char.ToLower(Mask[i])) return false;
+                        if (ignoreCase == false && toMatch[k] != mask[i]) return false;
+                        if (ignoreCase && Char.ToLower(toMatch[k]) != Char.ToLower(mask[i])) return false;
                         break;
                 }
                 i += 1;
                 k += 1;
             }
 
-            if ((k == ToMatch.Length) && (i == Mask.Length || Mask[i] == ';' || Mask[i] == '*')) return true;
+            if ((k == toMatch.Length) && (i == mask.Length || mask[i] == ';' || mask[i] == '*')) return true;
 
             return false;
         }

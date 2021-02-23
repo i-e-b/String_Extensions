@@ -1,4 +1,6 @@
-﻿namespace StringClusterScanTests.Search
+﻿// ReSharper disable InconsistentNaming
+// ReSharper disable PossibleNullReferenceException
+namespace StringClusterScanTests.Search
 {
     using System;
     using System.Diagnostics;
@@ -20,10 +22,12 @@
             Assert.That(haystack.Find(needle), Is.EqualTo(expectedOffset));
         }
 
+        // ReSharper disable StringLiteralTypo
         [Test]
         [TestCase("contains simple match", "gross", -1)]
         [TestCase("contains scattered match", "actetrdse", -1)]
         [TestCase("short", "very very long", -1)]
+        // ReSharper restore StringLiteralTypo
         public void non_matches(string haystack, string needle, int expectedOffset)
         {
             Assert.That(haystack.Find(needle), Is.EqualTo(expectedOffset));

@@ -11,6 +11,7 @@
     <AssemblyName>StringClusterScanTests</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +42,7 @@
     <Compile Include="Aggregation\DictionaryJoinTests.cs" />
     <Compile Include="Comparison\NaturalComparerTests.cs" />
     <Compile Include="Parsing\ToByteArrayTests.cs" />
+    <Compile Include="Replace\CaseSwitchTests.cs" />
     <Compile Include="Replace\ReplaceExtensionTests.cs" />
     <Compile Include="Search\FindClusterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,9 +53,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\String_Extensions\String_Extensions.csproj">
-      <Project>{329A3162-B373-4957-AABD-149FC036ED40}</Project>
-      <Name>String_Extensions</Name>
+    <ProjectReference Include="..\StringExtensionsNetStd\StringExtensionsNetStd.csproj">
+      <Project>{d02be61e-3a1c-4b47-881d-0fdee7265d30}</Project>
+      <Name>StringExtensionsNetStd</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

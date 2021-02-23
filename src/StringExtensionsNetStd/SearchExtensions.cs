@@ -13,7 +13,7 @@
         /// in `needle`, in any order. Returns -1 if not found.
         /// <para>This function can return false positives</para>
         /// </summary>
-        public static int FindCluster(this string haystack, string needle)
+        public static int FindCluster(this string? haystack, string? needle)
         {
             if (haystack == null) return -1;
             if (needle == null) return -1;
@@ -40,7 +40,7 @@
         /// <summary>
         /// Find the first offset in a string using a rolling hash. This is just an experiment -- use string.IndexOf().
         /// </summary>
-        public static int Find(this string haystack, string needle)
+        public static int Find(this string? haystack, string? needle)
         {
             if (haystack == null) return -1;
             if (needle == null) return -1;

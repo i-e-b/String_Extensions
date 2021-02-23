@@ -1,4 +1,6 @@
-﻿namespace StringClusterScanTests.Search
+﻿// ReSharper disable InconsistentNaming
+// ReSharper disable PossibleNullReferenceException
+namespace StringClusterScanTests.Search
 {
     using System;
     using System.Diagnostics;
@@ -9,6 +11,7 @@
     [TestFixture]
     public class FindClusterTests
     {
+        // ReSharper disable StringLiteralTypo
         [Test]
         [TestCase("contains simple match", "simple", 9)]
         [TestCase("contains scattered match", "actetrdse", 9)]
@@ -16,6 +19,7 @@
         [TestCase("near end", "end", 5)]
         [TestCase("last", "t", 3)]
         [TestCase("", "", 0)]
+        // ReSharper restore StringLiteralTypo
         public void matches(string haystack, string needle, int expectedOffset)
         {
             Assert.That(haystack.FindCluster(needle), Is.EqualTo(expectedOffset));

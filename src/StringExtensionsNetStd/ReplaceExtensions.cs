@@ -21,9 +21,9 @@ namespace String_Extensions
         /// <example><code>"OnCe UpOn A tImE".ReplaceCaseInvariant("TiMe", "Moon"); // "OnCe UpOn A Moon"</code></example>
         public static string ReplaceCaseInvariant(this string src, string targetPattern, string replacement)
         {
-            if (targetPattern == null) throw new ArgumentNullException("targetPattern");
-            if (replacement == null) throw new ArgumentNullException("replacement");
-            if (src == null) throw new ArgumentNullException("src");
+            if (targetPattern == null) throw new ArgumentNullException(nameof(targetPattern));
+            if (replacement == null) throw new ArgumentNullException(nameof(replacement));
+            if (src == null) throw new ArgumentNullException(nameof(src));
 
             if (targetPattern == "") return src;
 

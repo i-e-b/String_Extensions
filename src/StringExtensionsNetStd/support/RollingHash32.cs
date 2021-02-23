@@ -39,7 +39,7 @@
             _value = 0;
 
             int i = 0;
-            foreach (char c in prefillSource.ToCharArray())
+            foreach (var c in prefillSource)
             {
                 if (i >= windowWidth) break;
                 Fill(c);
@@ -50,7 +50,7 @@
         /// <summary>
         /// Last updated hash value
         /// </summary>
-        public uint Value { get { return _value; } }
+        public uint Value => _value;
 
         /// <summary>
         /// Return the has of a string, given a window equal to its length
@@ -58,7 +58,7 @@
         public static UInt32 HashOfString(string str)
         {
             var rh = new RollingHash32(str.Length);
-            foreach (char c in str.ToCharArray())
+            foreach (var c in str)
             {
                 rh.Fill(c);
             }
@@ -79,7 +79,7 @@
         /// </summary>
         uint Update(char c)
         {
-            var tail = _patch.First.Value;
+            var tail = _patch.First?.Value ?? (char)0;
             _patch.RemoveFirst();
             _patch.AddLast(c);
             var x = tail * HashConst;

@@ -8,6 +8,7 @@
     /// </summary>
     public static class ParsingExtensions
     {
+        // ReSharper disable once CommentTypo
         /// <summary>
         /// Converts a Hex-string into a byte array.
         /// <para>Take a string like "BADF00BA" into a byte array. String length should be a multiple of two.</para>
@@ -38,7 +39,7 @@
 
                 outp.Add(Convert.ToByte(string.Concat(a, b), 16));
             }
-            return outp.ToArray();
+            return outp.ToArray()!;
         }
     }
 }

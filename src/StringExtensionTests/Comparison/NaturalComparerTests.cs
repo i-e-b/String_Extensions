@@ -1,4 +1,5 @@
-﻿namespace StringClusterScanTests.Comparison
+﻿// ReSharper disable AssignNullToNotNullAttribute
+namespace StringClusterScanTests.Comparison
 {
     using System.Linq;
     using NUnit.Framework;
@@ -10,7 +11,7 @@
         string[] _inputSimple, _expectedSimple, _inputMixedStarts, _expectedMixedStarts, _inputsLeadingZeros, _expectedLeadingZeros, _inputsMultiPart, _expectedMultiPart;
 
         [SetUp]
-        public void setup()
+        public void Setup()
         {
             _inputSimple = new[] { "A", "B", "C", "1", "2", "3" };
             _expectedSimple = new[] { "1", "2", "3", "A", "B", "C" };
@@ -28,14 +29,14 @@
         [Test]
         public void numbers_sort_before_letters()
         {
-            var actual = _inputSimple.ToList();
+            var actual = _inputSimple!.ToList();
             actual.Sort(new NaturalComparer());
 
             Assert.That(actual.SequenceEqual(_expectedSimple));
         }
 
         [Test]
-        public void lexical_prefixes_supercede_numerical_value()
+        public void lexical_prefixes_supersede_numerical_value()
         {
             var actual = _inputMixedStarts.ToList();
             actual.Sort(new NaturalComparer());
