@@ -6,7 +6,7 @@ namespace StringClusterScanTests.Comparison
     using String_Extensions;
 
     [TestFixture]
-    public class NaturalComparerTests
+    public class NaturalComparerSortOrderTests
     {
         string[] _inputSimple, _expectedSimple, _inputMixedStarts, _expectedMixedStarts, _inputsLeadingZeros, _expectedLeadingZeros, _inputsMultiPart, _expectedMultiPart;
 

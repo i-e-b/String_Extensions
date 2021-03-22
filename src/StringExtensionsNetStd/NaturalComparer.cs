@@ -67,6 +67,42 @@
             return rightEnum.MoveNext() ? -1 : 0;
         }
 
+        /// <summary>
+        /// Compare two strings by ordinal rules (case sensitive, by exact character).
+        /// Strings will be considered equal if they have decimal numbers in the same places, but the numbers are different.
+        /// Null is considered not equal to anything (including another null)
+        /// </summary>
+        public static bool EqualsIgnoreNumbers(string? left, string? right)
+        {
+            if (left == null || right == null) return false;
+            if (left == right) return true;
+            
+            
+            var leftMatches = _sRegex.Matches(left);
+            var rightMatches = _sRegex.Matches(right);
+
+            var rightEnum = rightMatches.GetEnumerator();
+            foreach (Match lm in leftMatches)
+            {
+                if (!rightEnum.MoveNext())
+                {
+                    // the right-hand string ran out, so the strings are not equal
+                    return false;
+                }
+                var rm = rightEnum.Current as Match;
+                if (rm == null) continue;
+
+                var areEqualEnough = CompareTokensIgnoreNumber(CapturedStringFromMatch(lm), CapturedStringFromMatch(rm));
+                if (!areEqualEnough) return false;
+            }
+
+            // the left hand matches are exhausted;
+            // if there is more, then left was shorter and the strings are not equal
+            var anythingLeft = rightEnum.MoveNext();
+            
+            return !anythingLeft;
+        }
+
         private static string CapturedStringFromMatch(Match match)
         {
             if (match.Captures.Count != 1) throw new Exception("Match captures failed");
@@ -95,6 +131,16 @@
 
             return String.Compare(left, right, StringComparison.Ordinal);
         }
+        
+        private static bool CompareTokensIgnoreNumber(string left, string right)
+        {
+            var leftIsNum = double.TryParse(left, out _);
+            var rightIsNum = double.TryParse(right, out _);
 
+            // for a match, either they are both numbers, or are equal strings
+            return leftIsNum 
+                ? rightIsNum
+                : string.Equals(left, right, StringComparison.Ordinal);
+        }
     }
 }
