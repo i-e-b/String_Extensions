@@ -50,11 +50,7 @@ namespace String_Extensions
         {
             if (string.IsNullOrWhiteSpace(src)) return src;
 
-#if NETSTANDARD
             var chars = src.ToCharArray();
-#else
-            var chars = src.Normalize(NormalizationForm.FormD).ToCharArray();
-#endif
             var outp = new StringBuilder();
             foreach (var c in chars)
             {
