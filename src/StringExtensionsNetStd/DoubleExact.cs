@@ -24,8 +24,8 @@ namespace String_Extensions
         public bool TooManyDigits;
         
         /// <summary> If true, a special value string was found </summary>
-        private bool IsSpecial;
-        private double SpecialValue;
+        private bool _isSpecial;
+        private double _specialValue;
 
         /// <summary> Flags for parsing options </summary>
         [Flags]
@@ -79,8 +79,8 @@ namespace String_Extensions
                     // Try some of the special values
                     if (Remaining() == 3 && NextAre('i', 'n', 'f'))
                     {
-                        result.IsSpecial = true;
-                        result.SpecialValue = result.Negative ? double.NegativeInfinity : double.PositiveInfinity;
+                        result._isSpecial = true;
+                        result._specialValue = result.Negative ? double.NegativeInfinity : double.PositiveInfinity;
                     }
                     return result; // a  sign must be followed by an integer or the dot
                 }
@@ -123,8 +123,8 @@ namespace String_Extensions
                 currentPosition = startIdx;
                 if (NextAre('N', 'a', 'N'))
                 {
-                    result.IsSpecial = true;
-                    result.SpecialValue = double.NaN;
+                    result._isSpecial = true;
+                    result._specialValue = double.NaN;
                 }
 
                 return result;
@@ -251,7 +251,7 @@ namespace String_Extensions
         /// </summary>
         public double ToDouble()
         {
-            if (IsSpecial) return SpecialValue;
+            if (_isSpecial) return _specialValue;
 
             // Clinger's fast path.
             if (fastPath_minExponent <= Exponent && Exponent <= fastPath_maxExponent && Mantissa <= fastPath_maxMantissa && !TooManyDigits)
