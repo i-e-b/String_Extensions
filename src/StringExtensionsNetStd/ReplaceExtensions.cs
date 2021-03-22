@@ -39,7 +39,7 @@ namespace String_Extensions
         }
 
         /// <summary>
-        /// Create a new string that is as close to the original as possible, using only lowercase, low-ascii characters.
+        /// Create a new string that is as close to the original as possible, using only low-ascii characters.
         /// This will replace accented forms with ones that *look* similar, but it will often destroy or
         /// change meaning.
         /// Do NOT use this to present output to users. It is intended to use for stored search targets.

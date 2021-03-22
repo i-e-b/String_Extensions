@@ -23,6 +23,14 @@ Will be sorted correctly, as would be expected:
 
 > File 8, File 9, File 10, File 11
 
+### EqualsIgnoreNumbers
+
+Compare strings for equality, ignoring the actual values of decimal numbers
+
+`NaturalComparer.EqualsIgnoreNumbers("Added ID 5 to DB","Added ID 201 to DB")` == `true`
+
+`NaturalComparer.EqualsIgnoreNumbers("Added ID 5 to DB","ID 201 Failed")` == `false`
+
 ## Parsing
 
 ### ToByteArray
@@ -50,6 +58,15 @@ to users. It is intended to use for stored search targets.
 This is not exhaustive, and does not handle characters that are not latin-like (e.g. CJK)
         
 `HÉLLO, Åbjørn!".ReplaceAsciiCompatible() == "HELLO, Abjorn!"`
+
+### Switch case simple
+
+Fast case switching on strings that only makes changes that don't change the number
+of characters in the string.
+
+`"123 £%$: AAA aaa ǉ ǆ ß".ToUpperSimple() == "123 £%$: AAA AAA Ǉ Ǆ ß"`
+
+`"123 £%$: AAA aaa Ǉ Ǆ SS".ToLowerSimple() == "123 £%$: aaa aaa ǉ ǆ ss"`
 
 ## Searching
 
