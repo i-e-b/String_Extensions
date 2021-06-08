@@ -89,6 +89,14 @@
             var idx = src.IndexOf(target, stringComparison);
             return idx < 0 ? idx : idx + offset;
         }
+        
+        /// <summary>
+        /// Return last index of target + offset, or -1 if not found.
+        /// </summary>
+        public static int ExtendedLastIndexOf(this string src, string target, int offset, StringComparison stringComparison) {
+            var idx = src.LastIndexOf(target, stringComparison);
+            return idx < 0 ? idx : idx + offset;
+        }
 
         /// <summary>
         /// Return the substring after to but not including the last instance of character 'c'.
@@ -110,7 +118,7 @@
         {
             if (string.IsNullOrEmpty(src)) return "";
 
-            var idx = Math.Min(src.Length, src.ExtendedIndexOf(s, s.Length, stringComparison));
+            var idx = Math.Min(src.Length, src.ExtendedLastIndexOf(s, s.Length, stringComparison));
             return idx < 0 ? src : src.Substring(idx);
         }
     }

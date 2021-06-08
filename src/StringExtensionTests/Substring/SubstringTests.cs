@@ -13,6 +13,8 @@
         [TestCase("once upon a time", 'z', "once upon a time")]
         [TestCase("once upon a timez", 'z', "")]
         [TestCase("once upon a timze", 'z', "e")]
+        [TestCase("path/like/string", '/', "like/string")]
+        [TestCase("path\\like\\string", '\\', "like\\string")]
         public void substring_after_char(string src, char c, string expected)
         {
             Assert.That(src.SubstringAfter(c), Is.EqualTo(expected));
@@ -25,6 +27,8 @@
         [TestCase("once upon a time", "Once", "once upon a time")]
         [TestCase("once upon a time", "time", "")]
         [TestCase("once upon a time", "tim", "e")]
+        [TestCase("path/like/string", "/", "like/string")]
+        [TestCase("path\\like\\string", "\\", "like\\string")]
         public void substring_after_string_default(string src, string s, string expected)
         {
             Assert.That(src.SubstringAfter(s), Is.EqualTo(expected));
@@ -64,6 +68,35 @@
             Assert.That(src.SubstringBeforeLast(c), Is.EqualTo(expected));
         }
 
+
+        [Test]
+        [TestCase("once upon a time", 'o', "n a time")]
+        [TestCase("once upon a time", 'n', " a time")]
+        [TestCase("once upon a time", 'u', "pon a time")]
+        [TestCase("once upon a time", 'z', "once upon a time")]
+        [TestCase("once upon a timez", 'z', "")]
+        [TestCase("once upon a timze", 'z', "e")]
+        [TestCase("path/like/string", '/', "string")]
+        [TestCase("path\\like\\string", '\\', "string")]
+        public void substring_after_last_char(string src, char c, string expected)
+        {
+            Assert.That(src.SubstringAfterLast(c), Is.EqualTo(expected));
+        }
+
+        [Test]
+        [TestCase("once upon a time", "on", " a time")]
+        [TestCase("once upon a time", "n", " a time")]
+        [TestCase("once upon a time", "u", "pon a time")]
+        [TestCase("once upon a time", "z", "once upon a time")]
+        [TestCase("once upon a timez", "ez", "")]
+        [TestCase("once upon a timze", "mz", "e")]
+        [TestCase("path/like/string", "/", "string")]
+        [TestCase("path\\like\\string", "\\", "string")]
+        public void substring_after_last_string(string src, string pattern, string expected)
+        {
+            Assert.That(src.SubstringAfterLast(pattern), Is.EqualTo(expected));
+        }
+        
         [Test]
         [TestCase("once upon a time", "once", "")]
         [TestCase("once upon a time", "upon", "once ")]
