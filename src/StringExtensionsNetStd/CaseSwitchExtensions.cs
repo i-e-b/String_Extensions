@@ -8,13 +8,39 @@ namespace String_Extensions
     public static class CaseSwitchExtensions
     {
         /// <summary>
+        /// Set the character at the given index to upper case.
+        /// If the index is out of range or the character is already upper case,
+        /// the original string is returned.
+        /// </summary>
+        public static string? UpperCaseIndex(this string? input, int index)
+        {
+            if (input is null) return input;
+            if (index >= input.Length) return input;
+            if (index < 0) index += input.Length;
+            if (index < 0) return input;
+            
+            if (char.IsUpper(input[index])) return input;
+            
+            // simple cases done, now actually transform the string
+            var sb = new StringBuilder();
+            for (var i = 0; i < input.Length; i++)
+            {
+                var c = input[i];
+                if (i == index) c = char.ToUpper(c);
+                sb.Append(c);
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
         /// A fast case conversion based on table-lookups.
         /// This ignores all 'complex' cases, so the output will always be the
         /// same length as the input
         /// </summary>
         public static string? ToUpperSimple(this string? input)
         {
-            if (input == null) return null;
+            if (input is null) return null;
             var sb = new StringBuilder();
             foreach (var c in input)
             {
@@ -41,7 +67,7 @@ namespace String_Extensions
         /// </summary>
         public static string? ToLowerSimple(this string? input)
         {
-            if (input == null) return null;
+            if (input is null) return null;
             var sb = new StringBuilder();
             foreach (var c in input)
             {

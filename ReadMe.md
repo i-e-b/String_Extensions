@@ -68,6 +68,14 @@ of characters in the string.
 
 `"123 £%$: AAA aaa Ǉ Ǆ SS".ToLowerSimple() == "123 £%$: aaa aaa ǉ ǆ ss"`
 
+### Switch case of single character
+
+Set casing of characters in the string
+
+`"hello, world".UpperCaseIndex(0) == "Hello, world"`
+
+`"hello, world".UpperCaseIndex(-5) == "hello, World"`
+
 ## Searching
 
 ### FindCluster

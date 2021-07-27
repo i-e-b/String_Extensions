@@ -8,6 +8,26 @@ namespace StringClusterScanTests.Replace
     public class CaseSwitchTests
     {
         [Test]
+        [TestCase("lower case", 0, "Lower case")]
+        [TestCase("lower case", 6, "lower Case")]
+        [TestCase("lower case", 9, "lower casE")]
+        [TestCase("lower case", -10, "Lower case")]
+        [TestCase("lower case", -1, "lower casE")]
+        [TestCase("lower case", -11, "lower case")]
+        [TestCase("lower case", -100, "lower case")]
+        [TestCase("lower case", 10, "lower case")]
+        [TestCase("lower case", 100, "lower case")]
+        [TestCase(" ", 0, " ")]
+        [TestCase("", 0, "")]
+        [TestCase("+++", 1, "+++")]
+        [TestCase("Sentence case", 0, "Sentence case")]
+        public void upper_case_single_character_on_a_string(string input, int index, string expected)
+        {
+            var actual = input.UpperCaseIndex(index);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+        
+        [Test]
         [TestCase("Mixed case String", "MIXED CASE STRING")]
         [TestCase("MiXeD cAsE StRiNg", "MIXED CASE STRING")]
         [TestCase("ß", "ß")] // we specifically DON'T convert to "SS"
