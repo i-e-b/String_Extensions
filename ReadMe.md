@@ -3,6 +3,8 @@ String_Extensions
 
 A big pile of string manipulation methods for C#, to fill in some of the gaps of the default string library.
 
+https://www.nuget.org/packages/StringExtensionsNetStdIeb/
+
 ## Comparison
 
 ### CompareWildcard
