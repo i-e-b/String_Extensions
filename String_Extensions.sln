@@ -6,6 +6,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Info", "Info", "{287D6419-48DF-4153-A6EB-E94B58AF93ED}"
 	ProjectSection(SolutionItems) = preProject
 		ReadMe.md = ReadMe.md
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringExtensionsNetStd", "src\StringExtensionsNetStd\StringExtensionsNetStd.csproj", "{D02BE61E-3A1C-4B47-881D-0FDEE7265D30}"
