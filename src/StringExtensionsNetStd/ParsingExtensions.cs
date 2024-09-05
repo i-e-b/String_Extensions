@@ -1,45 +1,44 @@
-﻿namespace String_Extensions
+﻿namespace String_Extensions;
+
+using System;
+using System.Collections.Generic;
+
+/// <summary>
+/// Extensions for parsing common data types
+/// </summary>
+public static class ParsingExtensions
 {
-    using System;
-    using System.Collections.Generic;
-
+    // ReSharper disable once CommentTypo
     /// <summary>
-    /// Extensions for parsing common data types
+    /// Converts a Hex-string into a byte array.
+    /// <para>Take a string like "BADF00BA" into a byte array. String length should be a multiple of two.</para>
+    /// Remember to check for network order issues!
     /// </summary>
-    public static class ParsingExtensions
+    public static byte[] HexToByteArray(this string hexString)
     {
-        // ReSharper disable once CommentTypo
-        /// <summary>
-        /// Converts a Hex-string into a byte array.
-        /// <para>Take a string like "BADF00BA" into a byte array. String length should be a multiple of two.</para>
-        /// Remember to check for network order issues!
-        /// </summary>
-        public static byte[] HexToByteArray(this string hexString)
+        var outp = new List<byte>(hexString.Length / 2); // initial guess at length.
+
+        int i = 0;
+        while (i < hexString.Length)
         {
-            var outp = new List<byte>(hexString.Length / 2); // initial guess at length.
-
-            int i = 0;
-            while (i < hexString.Length)
+            while (!char.IsLetterOrDigit(hexString[i]))
             {
-                while (!char.IsLetterOrDigit(hexString[i]))
-                {
-                    i++;
-                    if (i >= hexString.Length) throw new Exception("hex string contains an uneven number of characters");
-                }
-                char a = hexString[i];
                 i++;
-
-                while (!char.IsLetterOrDigit(hexString[i]))
-                {
-                    i++;
-                    if (i >= hexString.Length) throw new Exception("hex string contains an uneven number of characters");
-                }
-                char b = hexString[i];
-                i++;
-
-                outp.Add(Convert.ToByte(string.Concat(a, b), 16));
+                if (i >= hexString.Length) throw new Exception("hex string contains an uneven number of characters");
             }
-            return outp.ToArray()!;
+            char a = hexString[i];
+            i++;
+
+            while (!char.IsLetterOrDigit(hexString[i]))
+            {
+                i++;
+                if (i >= hexString.Length) throw new Exception("hex string contains an uneven number of characters");
+            }
+            char b = hexString[i];
+            i++;
+
+            outp.Add(Convert.ToByte(string.Concat(a, b), 16));
         }
+        return outp.ToArray();
     }
 }

@@ -58,8 +58,14 @@ This will replace accented forms with ones that *look* similar, but it
 will often destroy or change meaning. Do **NOT** use this to present output
 to users. It is intended to use for stored search targets.
 This is not exhaustive, and does not handle characters that are not latin-like (e.g. CJK)
-        
+
 `HÉLLO, Åbjørn!".ReplaceAsciiCompatible() == "HELLO, Abjorn!"`
+
+### CamelCaseToWords
+
+Convert `camelCase` or `PascalCase` fused-word strings into space separated words.
+
+`MyABCsDoCamelCasePhrase".ReplaceAsciiCompatible() == "My ABCs Do Camel Case Phrase"`
 
 ### Switch case simple
 
@@ -91,4 +97,38 @@ This algorithm will give some false positives where the sum of character values 
 
 A range of substring before/after first/last instances of a character or string.
 
-SubstringBefore, SubstringBeforeLast, SubstringAfter, ExtendedIndexOf, SubstringAfterLast
+### SubstringBefore
+
+Return the substring up to but not including the first instance of string 's'.
+If 's' is not found, the entire string is returned.
+
+`"once upon a time".SubstringBefore("upon") == "once "`
+
+### SubstringBeforeLast
+
+Return the substring up to but not including the last instance of string 's'.
+If 's' is not found, the entire string is returned.
+
+`"once upon a time up high".SubstringBeforeLast("up") == "once upon a time "`
+
+### SubstringAfter
+
+Return the substring after to but not including the first instance of string 's'.
+If 's' is not found, the entire string is returned.
+
+`"it happened once upon a time".SubstringAfter("once") == " upon a time"`
+
+### SubstringAfterLast
+
+Return the substring after to but not including the last instance of string 's'.
+If 's' is not found, the entire string is returned.
+
+`"once upon a time".SubstringAfterLast("on") == " a time"`
+
+### IndexAfter / LastIndexAfter
+
+Return the index of the first character after a match.
+If match is not found, `-1` is returned.
+
+`"once upon a time".IndexAfter("on") == 2`
+`"once upon a time".LastIndexAfter("on") == 9`
