@@ -12,12 +12,14 @@ using System.Text.RegularExpressions;
 /// </summary>
 /// <remarks>
 /// You can drop this anywhere an IComparer is used on strings. To sort files by name with numbers in the right place:
-/// <para><code>new DirectoryInfo(@"C:\temp").GetFiles().Select(f=>f.Name).ToList().Sort(new NaturalComparer());</code></para>
-/// Then, given these files (as ordered by default .Net sort)
-/// <para>File 10, File 11, File 8, File 9</para>
-/// Will be sorted correctly, as would be expected:
-/// <para>File 8, File 9, File 10, File 11</para>
+/// <code>new DirectoryInfo(@"C:\temp").GetFiles().Select(f=>f.Name).ToList().Sort(new NaturalComparer());</code>
 /// </remarks>
+/// <example>
+/// Given <c>File 11, File 10, File 8, File 9</c>
+/// this will output
+/// <c>File 8, File 9, File 10, File 11</c>
+/// </example>
+/// <seealso cref="NumbersOnlyComparer"/>
 public class NaturalComparer : IComparer, IComparer<string>
 {
     int IComparer.Compare(object? left, object? right)

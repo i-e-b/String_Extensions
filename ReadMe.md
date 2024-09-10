@@ -16,7 +16,14 @@ Match strings to patterns using `*` and `?` placeholders. For when Regex is too 
 A comparer for use in Linq `Sort(...)` that respects numerical ordering.
 
 You can drop this anywhere an IComparer is used on strings. To sort files by name with numbers in the right place:
-`new DirectoryInfo(@"C:\temp").GetFiles().Select(f=>f.Name).ToList().Sort(new NaturalComparer());`
+```csharp
+var list = new DirectoryInfo(@"C:\temp")
+    .GetFiles()
+    .OrderBy(f=>f.Name, new NaturalComparer())
+    .ToList();
+```
+.OrderBy(f=>f.Name, new NaturalComparer()).ToList()
+
 Then, given these files (as ordered by default .Net sort)
 
 > File 10, File 11, File 8, File 9
@@ -25,13 +32,27 @@ Will be sorted correctly, as would be expected:
 
 > File 8, File 9, File 10, File 11
 
+### NumbersOnlyComparer
+
+Similar to `NaturalComparer`, but sorts only on number parts of strings. Strings without numbers are sorted last.
+
+All number values are treated as positive integers, with the `-`, `.`, `,` characters interpreted as separators.
+
+Given 
+
+`File`, `Users 2020-01-01`, `Accounts 2020-02-03`, `Accounts 2020-02-03_v2`
+
+this will output
+
+`Users 2020-01-01`, `Accounts 2020-02-03`, `Accounts 2020-02-03_v2`, `File`
+
 ### EqualsIgnoreNumbers
 
 Compare strings for equality, ignoring the actual values of decimal numbers
 
-`NaturalComparer.EqualsIgnoreNumbers("Added ID 5 to DB","Added ID 201 to DB")` == `true`
+`NaturalComparer.EqualsIgnoreNumbers("Added ID 5 to DB", "Added ID 201 to DB")` == `true`
 
-`NaturalComparer.EqualsIgnoreNumbers("Added ID 5 to DB","ID 201 Failed")` == `false`
+`NaturalComparer.EqualsIgnoreNumbers("Added ID 5 to DB", "ID 201 Failed")` == `false`
 
 ## Parsing
 
@@ -132,3 +153,76 @@ If match is not found, `-1` is returned.
 
 `"once upon a time".IndexAfter("on") == 2`
 `"once upon a time".LastIndexAfter("on") == 9`
+
+## Filtering
+
+### NormaliseWhitespace
+
+Replace all runs of whitespace with a single space character
+
+```csharp
+var output = "This\tis\u00a0a  story about \r\n a \rperson\n\t\r\n named Not, who was    tall."
+        .NormaliseWhitespace(char.IsLower);
+```
+
+results in `This is a story about a person named Not, who was tall.`
+
+### FilterCharacters
+
+Remove a string omitting characters where the function returns `true`
+
+```csharp
+var output = "Hello, World! How are you?"
+        .FilterCharacters(char.IsLower);
+```
+
+results in `H, W! H  ?`
+
+
+### Remove
+
+Return a string with all instances of all given unwanted strings removed,
+matched case sensitive.
+
+```csharp
+var output = "This is not a short story about a person named Not, who was not short but tall."
+        .Remove(new[]{"not", "short", "but"})
+```
+
+results in `This is  a  story about a person named Not, who was    tall.`
+
+### RemoveCaseInvariant
+
+Return a string with all instances of all given unwanted strings removed,
+matched case insensitive.
+
+```csharp
+var output = "This is not a short story about a person named Not, who was not short but tall."
+        .RemoveCaseInvariant(new[]{"not", "short", "but"})
+```
+
+results in `This is  a  story about a person named , who was    tall.`
+
+
+### RemoveNumbers
+
+Remove a string omitting all decimal digit characters.
+
+```csharp
+var output = "In 2024 at 12.15pm, we found 7 stone lions in a cave 250 miles from 9th Avenue"
+        .RemoveNumbers()
+```
+
+results in `In  at .pm, we found  stone lions in a cave  miles from th Avenue`
+
+### RemoveNonAlphaNumeric
+
+Keep only ASCII alphabetic and decimal characters in the string
+
+```csharp
+var output = "In 2024, we found 7 stone lions in a cave 250 miles from 9th Avenue."
+        .RemoveNonAlphaNumeric()
+```
+
+results in `In2024wefound7stonelionsinacave250milesfrom9thAvenue`
+

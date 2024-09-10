@@ -1,4 +1,5 @@
 ﻿// ReSharper disable AssignNullToNotNullAttribute
+
 namespace StringClusterScanTests.Comparison;
 
 using System.Linq;
@@ -29,8 +30,7 @@ public class NaturalComparerSortOrderTests
     [Test]
     public void numbers_sort_before_letters()
     {
-        var actual = _inputSimple!.ToList();
-        actual.Sort(new NaturalComparer());
+        var actual = _inputSimple!.OrderBy(a=>a, new NaturalComparer()).ToList();
 
         Assert.That(actual.SequenceEqual(_expectedSimple));
     }
