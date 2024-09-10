@@ -86,7 +86,7 @@ This is not exhaustive, and does not handle characters that are not latin-like (
 
 Convert `camelCase` or `PascalCase` fused-word strings into space separated words.
 
-`MyABCsDoCamelCasePhrase".ReplaceAsciiCompatible() == "My ABCs Do Camel Case Phrase"`
+`MyABCsDoCamelCasePhrase".CamelCaseToWords() == "My ABCs Do Camel Case Phrase"`
 
 ### Switch case simple
 
