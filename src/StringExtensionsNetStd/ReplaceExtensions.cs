@@ -91,19 +91,19 @@ public static class ReplaceExtensions
     /// This will replace accented forms with ones that *look* similar, but it will often destroy or
     /// change meaning.
     /// Do NOT use this to present output to users. It is intended to use for stored search targets.
-    /// This is not exhaustive, and does not handle characters that are not latin-like (e.g. CJK)
+    /// This is not exhaustive, and does not handle characters that are not latin-like (e.g. CJK, Arabic)
     /// </summary>
     /// <example><code>"HÉLLO, Åbjørn!".ReplaceAsciiCompatible() == "HELLO, Abjorn!"</code></example>
     public static string ReplaceAsciiCompatible(this string src)
     {
         if (string.IsNullOrWhiteSpace(src)) return src;
 
-        var chars = src.ToCharArray();
-        var outp = new StringBuilder();
-        foreach (var c in chars)
-        {
-            if (CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.NonSpacingMark) continue;
-            outp.Append(CharacterConverter.ConvertToAscii(c));
+        var charEnum = StringInfo.GetTextElementEnumerator(src);
+
+        var outp  = new StringBuilder();
+        while (charEnum.MoveNext()) {
+            var longChar = char.ConvertToUtf32(charEnum.GetTextElement(), 0);
+            outp.Append(CharacterConverter.ConvertToAscii(longChar));
         }
 
         return outp.ToString();

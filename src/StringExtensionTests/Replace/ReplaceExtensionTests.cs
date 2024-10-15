@@ -79,10 +79,16 @@ public class ReplaceExtensionTests
     }
 
     [Test]
+    [TestCase("I have nothing interesting to say", "I have nothing interesting to say")]
     [TestCase("HÉLLO, Åbjørn‼", "HELLO, Abjorn!!")]
+    [TestCase("اَلعَرَبِيَّةُ ٱلْفُصْحَىٰ", " ")] // This recognises the space, and flattens everything else
+    //[TestCase("\U000E0041\U000E0042\U000E0043\U000E0044\U000E0045", "ABCDE")] // Unicode 'tags' -- these get encoded as the surrogate pairs below:
+    [TestCase("\xDB40\xDC41\xDB40\xDC42\xDB40\xDC43\xDB40\xDC44\xDB40\xDC45", "ABCDE")] // Surrogate pairs of unicode 'tags'
     [TestCase("", "")]
     public void can_reduce_strings_to_ascii(string input, string expected)
     {
+        Console.WriteLine(input);
+        Console.WriteLine(expected);
         Assert.That(input.ReplaceAsciiCompatible(), Is.EqualTo(expected));
     }
 
