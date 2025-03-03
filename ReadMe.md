@@ -54,13 +54,21 @@ Compare strings for equality, ignoring the actual values of decimal numbers
 
 `NaturalComparer.EqualsIgnoreNumbers("Added ID 5 to DB", "ID 201 Failed")` == `false`
 
-## Parsing
+## Parsing and ToString
 
 ### ToByteArray
 
 Convert hex strings to byte arrays.
 
 Take a string like `BADF00BA` into a byte array. String length should be a multiple of two.
+
+### Approximate
+
+Convert a `TimeSpan` to a string approximation based on scale, from seconds to years
+
+### TimeLag
+
+Same as `Approximate`, but from two `DateTime` values.
 
 ## Replacement
 

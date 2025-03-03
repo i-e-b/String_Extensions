@@ -40,6 +40,4 @@ public class ToByteArrayTests
     {
         Assert.Throws<FormatException>(() => "not a hex string".HexToByteArray());
     }
-
-         
 }
