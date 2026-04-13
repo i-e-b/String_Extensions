@@ -19,7 +19,6 @@ public static class SubstringExtensions
         return idx < 0 ? src : src.Substring(0, idx);
     }
 
-
     /// <summary>
     /// Return the substring up to but not including the first instance of string 's'.
     /// If 's' is not found, the entire string is returned.
@@ -32,7 +31,6 @@ public static class SubstringExtensions
         return idx < 0 ? src : src.Substring(0, idx);
     }
 
-
     /// <summary>
     /// Return the substring up to but not including the last instance of character 'c'.
     /// If 'c' is not found, the entire string is returned.
@@ -44,7 +42,6 @@ public static class SubstringExtensions
         var idx = Math.Min(src!.Length, src.LastIndexOf(c));
         return idx < 0 ? src : src.Substring(0, idx);
     }
-
 
     /// <summary>
     /// Return the substring up to but not including the last instance of string 's'.
@@ -161,5 +158,20 @@ public static class SubstringExtensions
 
         var idx = Math.Min(src.Length, src.ExtendedLastIndexOf(s, src.Length - 1, s.Length, stringComparison));
         return idx < 0 ? src : src.Substring(idx);
+    }
+
+    /// <summary>
+    /// Return the number of common characters at the start of both strings
+    /// </summary>
+    public static int InitialOverlapWith(this string? src, string? other)
+    {
+        if (src is null || other is null) return 0;
+
+        var min = Math.Min(src.Length, other.Length);
+        for (int i = 0; i < min; i++)
+        {
+            if (src[i] != other[i]) return i;
+        }
+        return min;
     }
 }

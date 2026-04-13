@@ -108,4 +108,34 @@ public static class ReplaceExtensions
 
         return outp.ToString();
     }
+
+    /// <summary>
+    /// Replace runs of characters where the function returns <c>true</c>
+    /// with a single instance of the replacement string.
+    /// </summary>
+    public static string ReplaceByMatch(this string src, string replacement, Func<char, bool> remove)
+    {
+        var sb = new StringBuilder();
+
+        bool removed = false;
+
+        foreach (var c in src)
+        {
+            if (remove(c))
+            {
+                removed = true;
+                continue;
+            }
+
+            if (removed)
+            {
+                sb.Append(replacement);
+                removed = false;
+            }
+
+            sb.Append(c);
+        }
+
+        return sb.ToString();
+    }
 }
